@@ -18,6 +18,7 @@
 
 	<properties>
 		<java.version>11</java.version>
+		<spring.fox.version>3.0.0</spring.fox.version>
 	</properties>
 
 	<dependencies>
@@ -51,6 +52,18 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${spring.fox.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>${spring.fox.version}</version>
 		</dependency>
 
 	</dependencies>

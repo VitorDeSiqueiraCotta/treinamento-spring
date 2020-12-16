@@ -13,10 +13,10 @@ import com.projeto.treinamento.spring.services.CategoriaService;
 @RestController
 @RequestMapping(value = "/categorias")
 public class CategoriaController {
-	
+
 	@Autowired
 	private CategoriaService service;
-	
+
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<?> listar(@PathVariable Integer id) {
 		CategoriaEntity obj = service.getCategoria(id);

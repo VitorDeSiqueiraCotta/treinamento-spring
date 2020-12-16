@@ -13,10 +13,10 @@ public class CategoriaService {
 
 	@Autowired
 	private CategoriaRepository repo;
-	
+
 	public CategoriaEntity getCategoria(Integer id) {
 		Optional<CategoriaEntity> obj = repo.findById(id);
-		return obj.orElse(null); 
+		return obj.orElse(null);
 	}
-	
+
 }

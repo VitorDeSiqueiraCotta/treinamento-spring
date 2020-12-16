@@ -8,30 +8,34 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-public class CategoriaEntity implements Serializable {
+public class ProdutoEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+	private Double preco;
 
-	@JsonManagedReference
-	@ManyToMany(mappedBy = "listaCategorias")
-	private List<ProdutoEntity> listaProdutos = new ArrayList<>();
+	@ManyToMany
+	@JsonBackReference
+	@JoinTable(name = "ProdutoCategoria", joinColumns = @JoinColumn(name = "produtoId"), inverseJoinColumns = @JoinColumn(name = "categoriaId"))
+	private List<CategoriaEntity> listaCategorias = new ArrayList<>();
 
-	public CategoriaEntity() {
+	public ProdutoEntity() {
 	}
 
-	public CategoriaEntity(Integer id, String nome) {
+	public ProdutoEntity(Integer id, String nome, Double preco) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.preco = preco;
 	}
 
 	public Integer getId() {
@@ -50,12 +54,20 @@ public class CategoriaEntity implements Serializable {
 		this.nome = nome;
 	}
 
-	public List<ProdutoEntity> getListaProdutos() {
-		return listaProdutos;
+	public Double getPreco() {
+		return preco;
 	}
 
-	public void setListaProdutos(List<ProdutoEntity> listaProdutos) {
-		this.listaProdutos = listaProdutos;
+	public void setPreco(Double preco) {
+		this.preco = preco;
+	}
+
+	public List<CategoriaEntity> getListaCategorias() {
+		return listaCategorias;
+	}
+
+	public void setListaCategorias(List<CategoriaEntity> listaCategorias) {
+		this.listaCategorias = listaCategorias;
 	}
 
 	@Override
@@ -74,7 +86,7 @@ public class CategoriaEntity implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CategoriaEntity other = (CategoriaEntity) obj;
+		ProdutoEntity other = (ProdutoEntity) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -85,7 +97,7 @@ public class CategoriaEntity implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CategoriaEntity [id=" + id + ", nome=" + nome + "]";
+		return "ProdutoEntity [id=" + id + ", nome=" + nome + ", preco=" + preco + "]";
 	}
 
 }

@@ -31,9 +31,7 @@ public class ProdutoEntity implements Serializable {
 	public ProdutoEntity() {
 	}
 
-	public ProdutoEntity(Integer id, String nome, Double preco) {
-		super();
-		this.id = id;
+	public ProdutoEntity(String nome, Double preco) {
 		this.nome = nome;
 		this.preco = preco;
 	}

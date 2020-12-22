@@ -1,33 +1,31 @@
 package com.projeto.treinamento.spring.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class CategoriaEntity implements Serializable {
+public class CidadeEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	@JsonManagedReference
-	@ManyToMany(mappedBy = "listaCategorias")
-	private List<ProdutoEntity> listaProdutos = new ArrayList<>();
+	@ManyToOne
+	@JoinColumn(name = "estadoId")
+	private EstadoEntity estado;
 
-	public CategoriaEntity() {
+	public CidadeEntity() {
 	}
 
-	public CategoriaEntity(String nome) {
+	public CidadeEntity(String nome, EstadoEntity estado) {
 		this.nome = nome;
+		this.estado = estado;
 	}
 
 	public Integer getId() {
@@ -46,12 +44,16 @@ public class CategoriaEntity implements Serializable {
 		this.nome = nome;
 	}
 
-	public List<ProdutoEntity> getListaProdutos() {
-		return listaProdutos;
+	public EstadoEntity getEstado() {
+		return estado;
 	}
 
-	public void setListaProdutos(List<ProdutoEntity> listaProdutos) {
-		this.listaProdutos = listaProdutos;
+	public void setEstado(EstadoEntity estado) {
+		this.estado = estado;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override
@@ -70,7 +72,7 @@ public class CategoriaEntity implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CategoriaEntity other = (CategoriaEntity) obj;
+		CidadeEntity other = (CidadeEntity) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -81,7 +83,6 @@ public class CategoriaEntity implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CategoriaEntity [id=" + id + ", nome=" + nome + "]";
+		return "CidadeEntity [id=" + id + ", nome=" + nome + ", estado=" + estado + "]";
 	}
-
 }

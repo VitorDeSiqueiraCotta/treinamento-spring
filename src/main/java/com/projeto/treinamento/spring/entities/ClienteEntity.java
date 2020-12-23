@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.projeto.treinamento.spring.entities.enums.TipoClienteEnum;
 
 @Entity
@@ -24,6 +25,7 @@ public class ClienteEntity implements Serializable {
 	private String email;
 	private String cpfOuCnpj;
 	private Integer tipo;
+	@JsonManagedReference
 	@OneToMany(mappedBy = "cliente")
 	private Set<EnderecoEntity> enderecos = new HashSet<>();
 	@ElementCollection

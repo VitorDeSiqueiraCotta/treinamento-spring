@@ -1,7 +1,9 @@
 package com.projeto.treinamento.spring.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
@@ -31,6 +33,9 @@ public class ClienteEntity implements Serializable {
 	@ElementCollection
 	@CollectionTable(name = "telefone")
 	private Set<String> telefones = new HashSet<>();
+
+	@OneToMany(mappedBy = "cliente")
+	private List<PedidoEntity> pedidos = new ArrayList<>();
 
 	public ClienteEntity() {
 	}
@@ -101,6 +106,14 @@ public class ClienteEntity implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public List<PedidoEntity> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<PedidoEntity> pedidos) {
+		this.pedidos = pedidos;
 	}
 
 	@Override

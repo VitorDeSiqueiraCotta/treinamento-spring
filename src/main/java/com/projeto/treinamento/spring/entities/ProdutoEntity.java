@@ -2,7 +2,9 @@ package com.projeto.treinamento.spring.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -22,11 +25,12 @@ public class ProdutoEntity implements Serializable {
 	private Integer id;
 	private String nome;
 	private Double preco;
-
 	@ManyToMany
 	@JsonBackReference
 	@JoinTable(name = "ProdutoCategoria", joinColumns = @JoinColumn(name = "produtoId"), inverseJoinColumns = @JoinColumn(name = "categoriaId"))
 	private List<CategoriaEntity> listaCategorias = new ArrayList<>();
+	@OneToMany(mappedBy = "id.produto")
+	private Set<ItemPedidoEntity> itens = new HashSet<>();
 
 	public ProdutoEntity() {
 	}
@@ -34,6 +38,14 @@ public class ProdutoEntity implements Serializable {
 	public ProdutoEntity(String nome, Double preco) {
 		this.nome = nome;
 		this.preco = preco;
+	}
+
+	public List<PedidoEntity> getPedidos() {
+		List<PedidoEntity> list = new ArrayList<>();
+
+		for (ItemPedidoEntity x : itens)
+			list.add(x.getPedido());
+		return list;
 	}
 
 	public Integer getId() {
@@ -66,6 +78,14 @@ public class ProdutoEntity implements Serializable {
 
 	public void setListaCategorias(List<CategoriaEntity> listaCategorias) {
 		this.listaCategorias = listaCategorias;
+	}
+
+	public Set<ItemPedidoEntity> getItens() {
+		return itens;
+	}
+
+	public void setItens(Set<ItemPedidoEntity> itens) {
+		this.itens = itens;
 	}
 
 	@Override

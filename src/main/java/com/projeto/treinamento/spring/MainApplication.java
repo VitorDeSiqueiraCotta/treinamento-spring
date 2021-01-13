@@ -13,6 +13,7 @@ import com.projeto.treinamento.spring.entities.CidadeEntity;
 import com.projeto.treinamento.spring.entities.ClienteEntity;
 import com.projeto.treinamento.spring.entities.EnderecoEntity;
 import com.projeto.treinamento.spring.entities.EstadoEntity;
+import com.projeto.treinamento.spring.entities.ItemPedidoEntity;
 import com.projeto.treinamento.spring.entities.PagamentoBoletoEntity;
 import com.projeto.treinamento.spring.entities.PagamentoCartaoEntity;
 import com.projeto.treinamento.spring.entities.PagamentoEntity;
@@ -25,6 +26,7 @@ import com.projeto.treinamento.spring.repositories.CidadeRepository;
 import com.projeto.treinamento.spring.repositories.ClienteRepository;
 import com.projeto.treinamento.spring.repositories.EnderecoRepository;
 import com.projeto.treinamento.spring.repositories.EstadoRepository;
+import com.projeto.treinamento.spring.repositories.ItemPedidoRepository;
 import com.projeto.treinamento.spring.repositories.PagamentoRepository;
 import com.projeto.treinamento.spring.repositories.PedidoRepository;
 import com.projeto.treinamento.spring.repositories.ProdutoRepository;
@@ -47,6 +49,8 @@ public class MainApplication implements CommandLineRunner {
 	private PagamentoRepository pagamentoRepository;
 	@Autowired
 	private PedidoRepository pedidoRepository;
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(MainApplication.class, args);
@@ -100,6 +104,17 @@ public class MainApplication implements CommandLineRunner {
 
 		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
 
+		ItemPedidoEntity ip1 = new ItemPedidoEntity(ped1, p1, 0D, 2000D, 1);
+		ItemPedidoEntity ip2 = new ItemPedidoEntity(ped1, p3, 0D, 80D, 2);
+		ItemPedidoEntity ip3 = new ItemPedidoEntity(ped2, p2, 100D, 800D, 1);
+
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
@@ -108,6 +123,6 @@ public class MainApplication implements CommandLineRunner {
 		enderecoRepository.saveAll(Arrays.asList(e1, e2));
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pag1, pag2));
-
+		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
 	}
 }

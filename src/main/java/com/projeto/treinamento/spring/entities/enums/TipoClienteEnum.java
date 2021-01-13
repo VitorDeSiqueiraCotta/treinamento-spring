@@ -26,7 +26,7 @@ public enum TipoClienteEnum {
 		}
 
 		for (TipoClienteEnum aux : TipoClienteEnum.values()) {
-			if (aux.getId() == id) {
+			if (aux.getId().equals(id)) {
 				return aux;
 			}
 		}

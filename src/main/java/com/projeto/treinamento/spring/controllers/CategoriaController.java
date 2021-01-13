@@ -18,7 +18,7 @@ public class CategoriaController {
 	private CategoriaService service;
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<?> listar(@PathVariable Integer id) {
+	public ResponseEntity<CategoriaEntity> listar(@PathVariable Integer id) {
 		CategoriaEntity obj = service.getCategoria(id);
 		return ResponseEntity.ok().body(obj);
 	}

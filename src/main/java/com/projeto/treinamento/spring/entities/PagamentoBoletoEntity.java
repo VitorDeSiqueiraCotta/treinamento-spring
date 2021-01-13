@@ -38,4 +38,35 @@ public final class PagamentoBoletoEntity extends PagamentoEntity {
 		this.dataPagamento = dataPagamento;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((dataPagamento == null) ? 0 : dataPagamento.hashCode());
+		result = prime * result + ((dataVencimento == null) ? 0 : dataVencimento.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PagamentoBoletoEntity other = (PagamentoBoletoEntity) obj;
+		if (dataPagamento == null) {
+			if (other.dataPagamento != null)
+				return false;
+		} else if (!dataPagamento.equals(other.dataPagamento))
+			return false;
+		if (dataVencimento == null) {
+			if (other.dataVencimento != null)
+				return false;
+		} else if (!dataVencimento.equals(other.dataVencimento))
+			return false;
+		return true;
+	}
+
 }

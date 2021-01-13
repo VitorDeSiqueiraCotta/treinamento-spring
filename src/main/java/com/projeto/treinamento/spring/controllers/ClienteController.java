@@ -18,7 +18,7 @@ public class ClienteController {
 	private ClienteService service;
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<?> listar(@PathVariable Integer id) {
+	public ResponseEntity<ClienteEntity> listar(@PathVariable Integer id) {
 		ClienteEntity obj = service.getCliente(id);
 		return ResponseEntity.ok().body(obj);
 	}

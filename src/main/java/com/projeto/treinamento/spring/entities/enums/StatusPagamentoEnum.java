@@ -26,7 +26,7 @@ public enum StatusPagamentoEnum {
 		}
 
 		for (StatusPagamentoEnum aux : StatusPagamentoEnum.values()) {
-			if (aux.getId() == id) {
+			if (aux.getId().equals(id)) {
 				return aux;
 			}
 		}

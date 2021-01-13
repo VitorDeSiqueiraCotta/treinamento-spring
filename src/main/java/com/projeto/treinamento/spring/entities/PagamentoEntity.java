@@ -24,10 +24,10 @@ public abstract class PagamentoEntity implements Serializable {
 	@MapsId
 	private PedidoEntity pedido;
 
-	public PagamentoEntity() {
+	protected PagamentoEntity() {
 	}
 
-	public PagamentoEntity(StatusPagamentoEnum status, PedidoEntity pedido) {
+	protected PagamentoEntity(StatusPagamentoEnum status, PedidoEntity pedido) {
 		this.status = status.getId();
 		this.pedido = pedido;
 	}

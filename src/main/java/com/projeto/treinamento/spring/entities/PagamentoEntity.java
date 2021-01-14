@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.projeto.treinamento.spring.entities.enums.StatusPagamentoEnum;
 
 @Entity
@@ -19,6 +20,7 @@ public abstract class PagamentoEntity implements Serializable {
 	@Id
 	private Integer id;
 	private Integer status;
+	@JsonBackReference
 	@OneToOne
 	@JoinColumn(name = "pedidoId")
 	@MapsId
